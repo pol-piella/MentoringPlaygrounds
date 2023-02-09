@@ -19,8 +19,13 @@ struct Slide: Decodable {
     let title: String
 }
 
+// MARK: - Data Access Protocol
+protocol DataAccess {
+    func dataTask(with request: URLRequest, completion: @escaping (Result<Data, TransportError>) -> Void)
+}
+
 // MARK: - Transport
-class Transport {
+class Transport: DataAccess {
     func dataTask(with request: URLRequest, completion: @escaping (Result<Data, TransportError>) -> Void) {
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error {
@@ -50,10 +55,19 @@ class Transport {
     }
 }
 
+
 enum ServiceError: Error {}
 
 // MARK: - Service
 class Service {
+    
+    let transport: DataAccess
+    var urlRequestIsMadeTo: URL?
+    
+    init(withDataAccessor dataAccess: DataAccess) {
+        self.transport = dataAccess
+    }
+    
     func fetchData(_ completion: @escaping () -> Void) {
         var components = URLComponents()
         components.scheme = "https"
@@ -82,6 +96,30 @@ class ServiceTests: XCTestCase {
      - Test that when network request succeeds, correct decoded model is returned
      - Test that if decoding the data fails, an specific error is returned
      */
+    
+    func testGivenWeFetchData_RequestFormedCorrectly() {
+        // GIVEN
+        let expectedResult = URL(string: "www.hello.com")
+        // TODO: Mocks, doubles, fakes, spies!!??
+        
+        class MockDataAccess: DataAccess {
+            func dataTask(with request: URLRequest, completion: @escaping (Result<Data, TransportError>) -> Void) {
+                
+            }
+        }
+        
+        let mockDataAccess: DataAccess = MockDataAccess()
+        let service = Service(withDataAccessor: mockDataAccess)
+        
+        // WHEN
+        service.fetchData {
+            //my url is getting lost in here
+        }
+        
+        // THEN
+        XCTAssertEqual(expectedResult, service.urlRequestIsMadeTo!)
+        
+    }
 }
 
 // MARK: - Setup Unit Testing from a playground
@@ -97,3 +135,4 @@ class TestObserver: NSObject, XCTestObservation {
 let testObserver = TestObserver()
 XCTestObservationCenter.shared.addTestObserver(testObserver)
 ServiceTests.defaultTestSuite.run()
+

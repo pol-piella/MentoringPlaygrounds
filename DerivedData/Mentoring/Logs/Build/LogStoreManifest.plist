@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>265460E5-603B-4EB7-BF0B-C0041EB957FA</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>265460E5-603B-4EB7-BF0B-C0041EB957FA.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Mentoring</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Mentoring (Playground)</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>timeStartedRecording</key>
+			<real>697643661.29013705</real>
+			<key>timeStoppedRecording</key>
+			<real>697643661.43857098</real>
+			<key>title</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>uniqueIdentifier</key>
+			<string>265460E5-603B-4EB7-BF0B-C0041EB957FA</string>
+		</dict>
+		<key>84845BD8-62DB-4B8E-97FF-D5CEF3C52065</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>84845BD8-62DB-4B8E-97FF-D5CEF3C52065.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Mentoring</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Mentoring (Playground)</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>timeStartedRecording</key>
+			<real>697643624.48619604</real>
+			<key>timeStoppedRecording</key>
+			<real>697643625.60322702</real>
+			<key>title</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>uniqueIdentifier</key>
+			<string>84845BD8-62DB-4B8E-97FF-D5CEF3C52065</string>
+		</dict>
+		<key>C462392D-01C7-4A89-B490-C4BB32ADD579</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C462392D-01C7-4A89-B490-C4BB32ADD579.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Mentoring</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Mentoring (Playground)</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>timeStartedRecording</key>
+			<real>697643786.45429695</real>
+			<key>timeStoppedRecording</key>
+			<real>697643786.64878404</real>
+			<key>title</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>uniqueIdentifier</key>
+			<string>C462392D-01C7-4A89-B490-C4BB32ADD579</string>
+		</dict>
+		<key>C6311FC0-7822-4411-8BC4-D8CBFB72DCC1</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C6311FC0-7822-4411-8BC4-D8CBFB72DCC1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Mentoring</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Mentoring (Playground)</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>timeStartedRecording</key>
+			<real>697643642.00570095</real>
+			<key>timeStoppedRecording</key>
+			<real>697643642.14143503</real>
+			<key>title</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>uniqueIdentifier</key>
+			<string>C6311FC0-7822-4411-8BC4-D8CBFB72DCC1</string>
+		</dict>
+		<key>CC4D13FF-EFB2-49E2-B140-0182BE6E1190</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>CC4D13FF-EFB2-49E2-B140-0182BE6E1190.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>Mentoring</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>Mentoring (Playground)</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>0</integer>
+			<key>signature</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>timeStartedRecording</key>
+			<real>697645136.23892295</real>
+			<key>timeStoppedRecording</key>
+			<real>697645136.42555797</real>
+			<key>title</key>
+			<string>Build Mentoring (Playground)</string>
+			<key>uniqueIdentifier</key>
+			<string>CC4D13FF-EFB2-49E2-B140-0182BE6E1190</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
