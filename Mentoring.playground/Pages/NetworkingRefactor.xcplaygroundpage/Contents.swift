@@ -6,6 +6,7 @@ public enum TransportError: Error {
     case noNetwork
     case noData
     case invalidResponseType
+    case invalidUrl
     case other(Error)
 }
 
@@ -72,7 +73,7 @@ class Service {
     // you can only use it with closres that take no arguments but  return something
     // e.g. ()  -> String etc.
     
-    func fetchData(calendar: @autoclosure () -> Date=Date.init(), completion: @escaping () -> Void) {
+    func fetchData(calendar: @autoclosure () -> Date=Date.init(), completion: @escaping (Result<Data, TransportError>) -> Void) {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "httpbin.org"
@@ -80,11 +81,21 @@ class Service {
         components.queryItems = [
             URLQueryItem(name: "date", value: calendar().ISO8601Format())
         ]
-        let request = URLRequest(url: components.url!)
-        transport.dataTask(with: request) { result in
-            // Map or return an error here...
-            completion()
+        if let url = components.url {
+            let request = URLRequest(url: url)
+            transport.dataTask(with: request) { result in
+                // Map or return an error here...
+                switch result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        } else {
+            completion(.failure(TransportError.invalidUrl))
         }
+        
     }
 }
 
@@ -94,7 +105,7 @@ class ServiceTests: XCTestCase {
      Refactor so that we can:
      - Test that the `URLRequest` is built with correct URL <tick>
      - Test that if `URLComponents` fails to build a URL, a custom error is returned
-     - Test that the `date` passed as a query param is correct
+     - Test that the `date` passed as a query param is correct <tick>
      - Test that when the network request fails, a `ServiceError` is returned..
      - Test that when network request succeeds, correct decoded model is returned
      - Test that if decoding the data fails, an specific error is returned
@@ -119,11 +130,14 @@ class ServiceTests: XCTestCase {
         let service = Service(withDataAccessor: mockDataAccess)
         
         // WHEN
-        service.fetchData(calendar: expectedDate) {}
+        service.fetchData(calendar: expectedDate) {_ in }
         // THEN
         XCTAssertEqual(expectedResult, mockDataAccess.capturedRequest?.url)
         
     }
+    
+    // TO DO - > write a test for Test that if `URLComponents` fails to build a URL, a custom error is returned
+    // next time also do a pure RGRefactor cycle
 }
 
 // MARK: - Setup Unit Testing from a playground
