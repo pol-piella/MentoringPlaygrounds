@@ -68,16 +68,19 @@ class Service {
         self.transport = dataAccess
     }
     
-    func fetchData(_ completion: @escaping () -> Void) {
+    // if you mark a block with the autoclosure keyword it wraps the value you pass in, in a closure.
+    // you can only use it with closres that take no arguments but  return something
+    // e.g. ()  -> String etc.
+    
+    func fetchData(calendar: @autoclosure () -> Date=Date.init(), completion: @escaping () -> Void) {
         var components = URLComponents()
         components.scheme = "https"
         components.host = "httpbin.org"
         components.path = "/json"
         components.queryItems = [
-            URLQueryItem(name: "date", value: Date().ISO8601Format())
+            URLQueryItem(name: "date", value: calendar().ISO8601Format())
         ]
         let request = URLRequest(url: components.url!)
-        let transport = Transport()
         transport.dataTask(with: request) { result in
             // Map or return an error here...
             completion()
@@ -89,7 +92,7 @@ class Service {
 class ServiceTests: XCTestCase {
     /*
      Refactor so that we can:
-     - Test that the `URLRequest` is built with correct URL
+     - Test that the `URLRequest` is built with correct URL <tick>
      - Test that if `URLComponents` fails to build a URL, a custom error is returned
      - Test that the `date` passed as a query param is correct
      - Test that when the network request fails, a `ServiceError` is returned..
@@ -99,25 +102,26 @@ class ServiceTests: XCTestCase {
     
     func testGivenWeFetchData_RequestFormedCorrectly() {
         // GIVEN
-        let expectedResult = URL(string: "www.hello.com")
+        let expectedDate = Date()
+        let expectedResult = URL(string: "https://httpbin.org/json?date=\(expectedDate.ISO8601Format())")
         // TODO: Mocks, doubles, fakes, spies!!??
         
         class MockDataAccess: DataAccess {
+            
+            var capturedRequest: URLRequest? = nil
+            
             func dataTask(with request: URLRequest, completion: @escaping (Result<Data, TransportError>) -> Void) {
-                
+                self.capturedRequest = request
             }
         }
         
-        let mockDataAccess: DataAccess = MockDataAccess()
+        let mockDataAccess: MockDataAccess = MockDataAccess()
         let service = Service(withDataAccessor: mockDataAccess)
         
         // WHEN
-        service.fetchData {
-            //my url is getting lost in here
-        }
-        
+        service.fetchData(calendar: expectedDate) {}
         // THEN
-        XCTAssertEqual(expectedResult, service.urlRequestIsMadeTo!)
+        XCTAssertEqual(expectedResult, mockDataAccess.capturedRequest?.url)
         
     }
 }
