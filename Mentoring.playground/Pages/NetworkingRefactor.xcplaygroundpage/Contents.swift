@@ -1,7 +1,22 @@
 import UIKit
 import XCTest
 
-public enum TransportError: Error {
+public enum TransportError: Error, Equatable {
+    public static func == (lhs: TransportError, rhs: TransportError) -> Bool {
+        switch (lhs, rhs) {
+        case (.httpError(let lhsStatusCode), .httpError(let rhsStatusCode)):
+            return lhsStatusCode == rhsStatusCode
+        case (.noNetwork, .noNetwork): return true
+        case (.noData, .noData): return true
+        case (.invalidResponseType, .invalidResponseType): return true
+        case (.invalidUrl, .invalidUrl): return true
+        case (.other(let lhsError), .other(let rhsError)):
+            // This may not be best practice, what you may wish to do in real life is inspect the status codes (possibly on NSError - would need to check!)
+            return lhsError.localizedDescription == rhsError.localizedDescription
+        default: return false
+        }
+    }
+    
     case httpError(statusCode: Int)
     case noNetwork
     case noData
@@ -116,16 +131,7 @@ class ServiceTests: XCTestCase {
         let expectedDate = Date()
         let expectedResult = URL(string: "https://httpbin.org/json?date=\(expectedDate.ISO8601Format())")
         // TODO: Mocks, doubles, fakes, spies!!??
-        
-        class MockDataAccess: DataAccess {
-            
-            var capturedRequest: URLRequest? = nil
-            
-            func dataTask(with request: URLRequest, completion: @escaping (Result<Data, TransportError>) -> Void) {
-                self.capturedRequest = request
-            }
-        }
-        
+                
         let mockDataAccess: MockDataAccess = MockDataAccess()
         let service = Service(withDataAccessor: mockDataAccess)
         
@@ -136,8 +142,39 @@ class ServiceTests: XCTestCase {
         
     }
     
-    // TO DO - > write a test for Test that if `URLComponents` fails to build a URL, a custom error is returned
-    // next time also do a pure RGRefactor cycle
+    func testGivenInvalidURL_WhenBuiltByURLComponents_ThenAppropriateErrorIsReturned (){
+        // Given
+        let mockDataAccess: MockDataAccess = MockDataAccess()
+        let service = Service(withDataAccessor: mockDataAccess)
+        
+        // When
+        // TO DO: - this test is passing!!
+        // We need to make a URL builder injectable so we can see a failure on the URL. 
+       service.fetchData { result in
+            switch result {
+            case .success:
+                XCTFail("Shouldn't have entered success block")
+            case .failure(let error):
+                // Then
+                // We are mocking the async layer so we don't need an expectation
+                // If you are not sure try printing!
+                // INB Think about the code further down the line in complex systems - are you managing queues somewhere?
+                // In which case you may need to use expectations
+                XCTAssertEqual(TransportError.invalidUrl, error)
+            }
+        }
+    }
+}
+
+// MARK: - DataAccess Object for Tests
+
+class MockDataAccess: DataAccess {
+    
+    var capturedRequest: URLRequest? = nil
+    
+    func dataTask(with request: URLRequest, completion: @escaping (Result<Data, TransportError>) -> Void) {
+        self.capturedRequest = request
+    }
 }
 
 // MARK: - Setup Unit Testing from a playground
